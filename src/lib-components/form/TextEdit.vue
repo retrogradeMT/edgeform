@@ -5,7 +5,7 @@
         data-text-field
         key="textActive"
         :ref="opts.field"
-        :outlined="editField == opts.field"
+        outlined
         dense
         v-on:keydown.enter="emitChange"
         v-on:keydown.tab="emitChange"

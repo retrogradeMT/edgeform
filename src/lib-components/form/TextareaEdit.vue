@@ -8,7 +8,7 @@
         :label="label"
         rows="7"
         v-model="computedValue"
-        :outlined="editField == opts.field"
+        outlined
         v-on:keyup.enter="emitChange"
         @change="emitChange"
         style="height:150px"
@@ -22,7 +22,7 @@
 <script>
 import { VTextarea } from 'vuetify/lib';
 export default {
-  name: "TextareaEdit",
+  name: "textareaEdit",
   components: {
         VTextarea,
   },
