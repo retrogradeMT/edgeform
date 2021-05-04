@@ -2,17 +2,16 @@
   <div>
     <v-select
       key="select"
-      :outlined="editField == opts.field"
+      outlined
       @change="blurField"
       :label="opts.label"
-      class="ma-3"
       v-model="computedValue"
       :items="items"
       item-text="label"
       item-value="value"
       hide-details
       :multiple="false"
-      dense
+      :dense="dense"
       @focus="emitFocus"
     ></v-select>
   </div>
@@ -48,6 +47,10 @@ export default {
     value: {
       type: [String, Number, Boolean],
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

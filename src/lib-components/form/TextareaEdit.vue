@@ -1,28 +1,24 @@
 <template>
-  <div>
-    <transition name="fade" mode="out-in">
+  
       <v-textarea
         hide-details
         :filled="editField != opts.field"
-        class="mx-2"
         :label="label"
         rows="7"
         v-model="computedValue"
         outlined
         v-on:keyup.enter="emitChange"
         @change="emitChange"
-        style="height:150px"
         @focus="emitFocus"
         :placeholder="'Add a ' + opts.label"
       ></v-textarea>
-    </transition>
-  </div>
+    
 </template>
 
 <script>
 import { VTextarea } from 'vuetify/lib';
 export default {
-  name: "textareaEdit",
+  name: "TextareaEdit",
   components: {
         VTextarea,
   },
@@ -42,6 +38,10 @@ export default {
     value: {
       type: String,
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {

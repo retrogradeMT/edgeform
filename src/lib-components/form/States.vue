@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <transition name="fade" mode="out-in">
+  
       <v-autocomplete
         key="select"
-        :outline="editField == opts.field"
         @change="blurField"
         :label="opts.label + required"
-        class="ma-3"
+      
         v-model="computedValue"
         :items="items"
         :rules="rules"
         validate-on-blur
         :multiple="false"
-        dense
+        :dense="dense"
         @focus="emitFocus"
         type="select"
+        outlined
         autocomplete="new-password"
       ></v-autocomplete>
-    </transition>
-  </div>
+    
 </template>
 
 <script>
@@ -47,6 +45,10 @@ export default {
     value: {
       type: String,
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

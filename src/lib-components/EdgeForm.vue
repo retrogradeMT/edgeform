@@ -7,7 +7,7 @@
       v-for="field in orderedHeaders"
       :key="field.order"
     >
-      <v-col
+      <v-col v-if="!noIcon"
         :cols="1"
         class="justify-center flex-grow-0 flex-shrink-0 d-none d-md-flex"
       >
@@ -16,13 +16,14 @@
 
       <v-col
         cols="12"
-        md="11"
+        :md="noIcon? 12 : 11"
         class="align-start"
         @mouseenter="focusField(field.field)"
         @mousedown="fieldSelected(field.field)"
         :class="mapClass(field.type)"
       >
         <component
+          :dense="dense"
           v-model="alt[field.field]"
           :is="mapType(field.type)"
           :key="field.order"
@@ -125,6 +126,14 @@ export default {
     parentPath: {
       type: String,
       default: ""
+    },
+    noIcon: {
+      type: Boolean,
+      default: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -281,7 +290,7 @@ export default {
 }
 
 .textarea-field {
-  min-height: 180px;
+  min-height: 130px;
 }
 
 .wysiwyg-field {

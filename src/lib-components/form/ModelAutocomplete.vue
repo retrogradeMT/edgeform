@@ -1,16 +1,16 @@
 <template>
-  <div>
+
     <v-autocomplete
       allow-overflow
       :loading="loading"
       v-model="selectBox"
       :items="items"
+      outlined
       :search-input.sync="search"
       :key="opts.itemValue"
       @change="blurField()"
-      :outlined="editField == opts.field"
       :label="opts.label"
-      class="ma-3"
+    
       :item-text="opts.itemText"
       :item-value="opts.itemValue"
       hide-details
@@ -18,7 +18,7 @@
       :multiple="multiple"
       small-chips
       :clearable="clearable"
-      dense
+      :dense="dense"
       @focus="emitFocus"
       type="select"
       autocomplete="new-password"
@@ -49,7 +49,7 @@
         </v-list-item-content>
       </template>
     </v-autocomplete>
-  </div>
+  
 </template>
 
 <script>
@@ -81,6 +81,10 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

@@ -10,12 +10,12 @@
     >
       <template v-slot:activator="{ on }">
         <v-text-field
-          :outlined="editField == opts.field"
-          dense
+          :dense="dense"
           v-on="on"
+          outlined
           :value="dateFormatted"
           :label="opts.label + required"
-          class="ma-3"
+          
           :rules="rules"
           v-mask="'##/##/####'"
           @focus="emitFocus"
@@ -53,6 +53,10 @@ export default {
     value: {
       type: String,
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

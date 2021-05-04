@@ -1,16 +1,15 @@
 <template>
-  <div>
-    <transition name="fade" mode="out-in">
+
       <v-text-field
-        :outlined="editField == opts.field"
         key="textActive"
-        dense
+        :dense="dense"
+        outlined
         v-on:keyup.enter="emitChange"
         v-on:keyup.tab="emitChange"
         :value="value"
         v-on:input="setPhone"
         :label="opts.label + required"
-        class="ma-3"
+      
         :rules="rules"
         validate-on-blur
         :readonly="opts.readOnly"
@@ -18,8 +17,7 @@
         @focus="emitFocus"
         @change="emitChange"
       ></v-text-field>
-    </transition>
-  </div>
+    
 </template>
 
 <script>
@@ -44,6 +42,10 @@ export default {
     value: {
       type: String,
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
 

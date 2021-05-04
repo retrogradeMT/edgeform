@@ -1,16 +1,16 @@
 <template>
-  <div>
+
     <v-switch
       inset
       color="secondary"
-      dense
+      :dense="dense"
       v-model="computedValue"
       :label="opts.label"
       v-on:change="blurField"
       hide-details
       @focus="emitFocus"
     ></v-switch>
-  </div>
+
 </template>
 
 <script>
@@ -36,6 +36,10 @@ export default {
     value: {
       type: [ String, Number, Boolean ],
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

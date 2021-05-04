@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <transition name="fade" mode="out-in">
+  
       <v-currency-field
         v-bind="currency_config"
         :ref="opts.field"
         key="moneyActive"
-        :outlined="editField == opts.field"
-        dense
+        :dense="dense"
+        outlined
         v-model="emit"
         :label="opts.label + required"
-        class="ma-3"
+ 
         v-on:change="emitChange"
       ></v-currency-field>
-    </transition>
-  </div>
+    
 </template>
 
 <script>
@@ -35,6 +33,10 @@ export default {
     value: {
       type: [Number, String],
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
 

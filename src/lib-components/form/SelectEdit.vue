@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <transition name="fade" mode="out-in">
+
       <v-select
         key="select"
-        :outlined="editField == opts.field"
         @change="blurField"
+        outlined
         :label="opts.label + required"
-        class="ma-3"
+        
         v-model="computedValue"
         :items="items"
         :item-text="opts.itemText"
@@ -17,11 +16,10 @@
         :rules="rules"
         validate-on-blur
         small-chips
-        dense
+        :dense="dense"
         @focus="emitFocus"
       ></v-select>
-    </transition>
-  </div>
+   
 </template>
 
 <script>
@@ -50,6 +48,10 @@ export default {
     value: {
       type: [String, Number],
       required: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
