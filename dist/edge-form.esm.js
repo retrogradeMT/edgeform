@@ -7,7 +7,7 @@ import { TiptapVuetify, History, Blockquote, Link, Underline, Strike, Italic, Li
 const typeToComponent = {
   text: "textEdit",
   email: "textEdit",
-  website: "textEdit",
+  website: "selectEdit",
   checkbox: "SwitchEdit",
   textarea: "textareaEdit",
   select: "textSelect",
@@ -457,8 +457,8 @@ var __vue_staticRenderFns__$f = [];
 
 const __vue_inject_styles__$f = function (inject) {
   if (!inject) return;
-  inject("data-v-231f1512_0", {
-    source: ".input-field[data-v-231f1512]{height:70px}.textarea-field[data-v-231f1512]{min-height:160px}.wysiwyg-field[data-v-231f1512]{min-height:400px}.documents[data-v-231f1512]{min-height:80px}",
+  inject("data-v-c073dfaa_0", {
+    source: ".input-field[data-v-c073dfaa]{height:70px}.textarea-field[data-v-c073dfaa]{min-height:130px}.wysiwyg-field[data-v-c073dfaa]{min-height:400px}.documents[data-v-c073dfaa]{min-height:80px}",
     map: undefined,
     media: undefined
   });
@@ -466,7 +466,7 @@ const __vue_inject_styles__$f = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$f = "data-v-231f1512";
+const __vue_scope_id__$f = "data-v-c073dfaa";
 /* module identifier */
 
 const __vue_module_identifier__$f = undefined;
@@ -1499,9 +1499,6 @@ var __vue_render__$9 = function () {
   var _c = _vm._self._c || _h;
 
   return _c('v-textarea', {
-    staticStyle: {
-      "height": "135px"
-    },
     attrs: {
       "hide-details": "",
       "filled": _vm.editField != _vm.opts.field,
@@ -1537,7 +1534,7 @@ var __vue_staticRenderFns__$9 = [];
 const __vue_inject_styles__$9 = undefined;
 /* scoped */
 
-const __vue_scope_id__$9 = "data-v-08a7446b";
+const __vue_scope_id__$9 = "data-v-f2e7fde6";
 /* module identifier */
 
 const __vue_module_identifier__$9 = undefined;
@@ -2421,9 +2418,9 @@ const __vue_component__$3 = /*#__PURE__*/normalizeComponent({
 
 //
 var script$2 = {
-  name: "SelectEdit",
+  name: "TextSelect",
   components: {
-    VSwitch
+    VSelect
   },
 
   created() {// this.seed();
@@ -2592,8 +2589,8 @@ var __vue_staticRenderFns__$2 = [];
 
 const __vue_inject_styles__$2 = function (inject) {
   if (!inject) return;
-  inject("data-v-ccd59f58_0", {
-    source: ".fade-enter-active[data-v-ccd59f58],.fade-leave-active[data-v-ccd59f58]{transition:opacity .1s}.fade-enter[data-v-ccd59f58],.fade-leave-to[data-v-ccd59f58]{opacity:0}",
+  inject("data-v-3db1e40e_0", {
+    source: ".fade-enter-active[data-v-3db1e40e],.fade-leave-active[data-v-3db1e40e]{transition:opacity .1s}.fade-enter[data-v-3db1e40e],.fade-leave-to[data-v-3db1e40e]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -2601,7 +2598,7 @@ const __vue_inject_styles__$2 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$2 = "data-v-ccd59f58";
+const __vue_scope_id__$2 = "data-v-3db1e40e";
 /* module identifier */
 
 const __vue_module_identifier__$2 = undefined;
@@ -3293,7 +3290,7 @@ var components = /*#__PURE__*/Object.freeze({
   MoneyRaw: __vue_component__$5,
   Phone: __vue_component__$4,
   TextReadOnly: __vue_component__$3,
-  SelectEdit: __vue_component__$2,
+  TextSelect: __vue_component__$2,
   Time: __vue_component__$1,
   Wysiwyg: __vue_component__
 });
@@ -3307,4 +3304,4 @@ const install = function installEdgeForm(Vue) {
 }; // Create module definition for Vue.use()
 
 export default install;
-export { __vue_component__$d as DateEdit, __vue_component__$f as EdgeForm, __vue_component__$e as Loading, __vue_component__$c as ModelAutocomplete, __vue_component__$6 as Money, __vue_component__$5 as MoneyRaw, __vue_component__$4 as Phone, __vue_component__$2 as SelectEdit, __vue_component__$b as States, __vue_component__$a as SwitchEdit, __vue_component__$8 as TextAreaReadOnly, __vue_component__$7 as TextEdit, __vue_component__$3 as TextReadOnly, __vue_component__$9 as TextareaEdit, __vue_component__$1 as Time, __vue_component__ as Wysiwyg };
+export { __vue_component__$d as DateEdit, __vue_component__$f as EdgeForm, __vue_component__$e as Loading, __vue_component__$c as ModelAutocomplete, __vue_component__$6 as Money, __vue_component__$5 as MoneyRaw, __vue_component__$4 as Phone, __vue_component__$b as States, __vue_component__$a as SwitchEdit, __vue_component__$8 as TextAreaReadOnly, __vue_component__$7 as TextEdit, __vue_component__$3 as TextReadOnly, __vue_component__$2 as TextSelect, __vue_component__$9 as TextareaEdit, __vue_component__$1 as Time, __vue_component__ as Wysiwyg };

@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import { VSwitch } from 'vuetify/lib';
+import { VSelect } from 'vuetify/lib';
 export default {
-  name: "SelectEdit",
+  name: "TextSelect",
   components: {
-        VSwitch,
+        VSelect,
   },
   created() {
     // this.seed();

@@ -110,7 +110,7 @@ function _nonIterableRest() {
 }var typeToComponent = {
   text: "textEdit",
   email: "textEdit",
-  website: "textEdit",
+  website: "selectEdit",
   checkbox: "SwitchEdit",
   textarea: "textareaEdit",
   select: "textSelect",
@@ -619,8 +619,8 @@ var __vue_staticRenderFns__$f = [];
 
 var __vue_inject_styles__$f = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-231f1512_0", {
-    source: ".input-field[data-v-231f1512]{height:70px}.textarea-field[data-v-231f1512]{min-height:160px}.wysiwyg-field[data-v-231f1512]{min-height:400px}.documents[data-v-231f1512]{min-height:80px}",
+  inject("data-v-c073dfaa_0", {
+    source: ".input-field[data-v-c073dfaa]{height:70px}.textarea-field[data-v-c073dfaa]{min-height:130px}.wysiwyg-field[data-v-c073dfaa]{min-height:400px}.documents[data-v-c073dfaa]{min-height:80px}",
     map: undefined,
     media: undefined
   });
@@ -628,10 +628,10 @@ var __vue_inject_styles__$f = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$f = "data-v-231f1512";
+var __vue_scope_id__$f = "data-v-c073dfaa";
 /* module identifier */
 
-var __vue_module_identifier__$f = "data-v-231f1512";
+var __vue_module_identifier__$f = "data-v-c073dfaa";
 /* functional template */
 
 var __vue_is_functional_template__$f = false;
@@ -1600,9 +1600,6 @@ var __vue_render__$9 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c('v-textarea', {
-    staticStyle: {
-      "height": "135px"
-    },
     attrs: {
       "hide-details": "",
       "filled": _vm.editField != _vm.opts.field,
@@ -1638,10 +1635,10 @@ var __vue_staticRenderFns__$9 = [];
 var __vue_inject_styles__$9 = undefined;
 /* scoped */
 
-var __vue_scope_id__$9 = "data-v-08a7446b";
+var __vue_scope_id__$9 = "data-v-f2e7fde6";
 /* module identifier */
 
-var __vue_module_identifier__$9 = "data-v-08a7446b";
+var __vue_module_identifier__$9 = "data-v-f2e7fde6";
 /* functional template */
 
 var __vue_is_functional_template__$9 = false;
@@ -2463,9 +2460,9 @@ var __vue_component__$3 = /*#__PURE__*/normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$3
 }, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);//
 var script$2 = {
-  name: "SelectEdit",
+  name: "TextSelect",
   components: {
-    VSwitch: lib.VSwitch
+    VSelect: lib.VSelect
   },
   created: function created() {// this.seed();
   },
@@ -2615,8 +2612,8 @@ var __vue_staticRenderFns__$2 = [];
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-ccd59f58_0", {
-    source: ".fade-enter-active[data-v-ccd59f58],.fade-leave-active[data-v-ccd59f58]{transition:opacity .1s}.fade-enter[data-v-ccd59f58],.fade-leave-to[data-v-ccd59f58]{opacity:0}",
+  inject("data-v-3db1e40e_0", {
+    source: ".fade-enter-active[data-v-3db1e40e],.fade-leave-active[data-v-3db1e40e]{transition:opacity .1s}.fade-enter[data-v-3db1e40e],.fade-leave-to[data-v-3db1e40e]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -2624,10 +2621,10 @@ var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$2 = "data-v-ccd59f58";
+var __vue_scope_id__$2 = "data-v-3db1e40e";
 /* module identifier */
 
-var __vue_module_identifier__$2 = "data-v-ccd59f58";
+var __vue_module_identifier__$2 = "data-v-3db1e40e";
 /* functional template */
 
 var __vue_is_functional_template__$2 = false;
@@ -3255,7 +3252,7 @@ var __vue_is_functional_template__ = false;
 var __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextAreaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,SelectEdit: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});var install = function installEdgeForm(Vue) {
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextAreaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});var install = function installEdgeForm(Vue) {
   Object.entries(components$1).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         componentName = _ref2[0],
@@ -3264,7 +3261,7 @@ var __vue_component__ = /*#__PURE__*/normalizeComponent({
     Vue.component(componentName, component);
   });
 }; // Create module definition for Vue.use()
-var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextAreaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,SelectEdit: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});// only expose one global var, with component exports exposed as properties of
+var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextAreaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});// only expose one global var, with component exports exposed as properties of
 // that global var (eg. plugin.component)
 
 Object.entries(components).forEach(function (_ref) {

@@ -54,7 +54,7 @@ import { VIcon } from 'vuetify/lib';
 const typeToComponent = {
     text: "textEdit",
     email: "textEdit",
-    website: "textEdit",
+    website: "selectEdit",
     checkbox: "SwitchEdit",
     textarea: "textareaEdit",
     select: "textSelect",
