@@ -53,7 +53,11 @@
 </template>
 
 <script>
+import { VAutocomplete } from 'vuetify/lib';
 export default {
+  components: {
+        VAutocomplete,
+  },
   created() {
     this.debouncedQuery = _.debounce(this.querySelections, 300);
   },
