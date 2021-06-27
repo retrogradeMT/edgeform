@@ -1,27 +1,27 @@
 <template>
   <v-card-text>
     <loading :loading="loading"></loading>
-    <v-row
-      no-gutters
-      class="align-center d-flex"
+     <v-form
+    :ref="'form_' + random"
+    
+  >
+   
+    <div
       v-for="field in orderedHeaders"
       :key="field.order"
-    >
-      <v-col v-if="!noIcon"
-        :cols="1"
-        class="justify-center flex-grow-0 flex-shrink-0 d-none d-md-flex"
-      >
-        <v-icon v-if="field.icon">{{ field.icon }}</v-icon>
-      </v-col>
-
-      <v-col
-        cols="12"
-        :md="noIcon? 12 : 11"
-        class="align-start"
+        class="align-start d-flex flex-column"
         @mouseenter="focusField(field.field)"
         @mousedown="fieldSelected(field.field)"
         :class="mapClass(field.type)"
-      >
+    >
+
+    
+    
+      <!-- TODO: Move icon to a prepend inside of the component.  -->
+        <!-- <v-icon v-if="field.icon">{{ field.icon }}</v-icon> -->
+     
+
+     
         <component
           :dense="dense"
           v-model="alt[field.field]"
@@ -40,8 +40,8 @@
           v-on:fieldFocused="fieldFocused"
         >
         </component>
-      </v-col>
-    </v-row>
+      </div>
+     </v-form>
   </v-card-text>
 </template>
 
@@ -51,6 +51,7 @@ import { VCardText } from 'vuetify/lib';
 import { VRow } from 'vuetify/lib';
 import { VCol } from 'vuetify/lib';
 import { VIcon } from 'vuetify/lib';
+import { VForm } from 'vuetify/lib';
 const typeToComponent = {
     text: "textEdit",
     email: "textEdit",
@@ -92,14 +93,19 @@ export default {
         VCardText,
         VRow,
         VCol,
-        VIcon
+        VIcon,
+        VForm
+    },
+    created () {
+      this.generateRandom();
     },
 
   data() {
     return {
       editField: "",
       selectedField: "",
-      loading: false
+      loading: false,
+      random: ""
     };
   },
   props: {
@@ -149,9 +155,13 @@ export default {
       set() {
         this.saveChangedField();
       }
-    }
+    },
+
   },
   methods: {
+    generateRandom(){
+      this.random = Math.random().toString().substr(2, 8);
+    },
     async fieldFocused(field) {
       await this.focusField(field);
       this.fieldSelected(field);
@@ -286,7 +296,7 @@ export default {
 
 <style lang="scss" scoped>
 .input-field {
-  height: 70px;
+  min-height: 70px;
 }
 
 .textarea-field {

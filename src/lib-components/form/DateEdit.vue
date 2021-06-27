@@ -33,9 +33,18 @@
 
 <script>
 import { mask } from "vue-the-mask";
+import { VDatePicker } from 'vuetify/lib';
+import { VTextField } from 'vuetify/lib';
+import { VMenu } from 'vuetify/lib';
 export default {
   directives: {
     mask
+  },
+  components: {
+    VDatePicker,
+    VTextField,
+    VMenu
+
   },
   props: {
     active: {
