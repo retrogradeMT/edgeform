@@ -9,7 +9,7 @@
     <div
       v-for="field in orderedHeaders"
       :key="field.order"
-        class="align-start d-flex flex-column"
+        class="align-start d-flex"
         @mouseenter="focusField(field.field)"
         @mousedown="fieldSelected(field.field)"
         :class="mapClass(field.type)"

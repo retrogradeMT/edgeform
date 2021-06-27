@@ -410,7 +410,7 @@ var __vue_render__$f = function () {
   }, _vm._l(_vm.orderedHeaders, function (field) {
     return _c('div', {
       key: field.order,
-      staticClass: "align-start d-flex flex-column",
+      staticClass: "align-start d-flex",
       class: _vm.mapClass(field.type),
       on: {
         "mouseenter": function ($event) {
@@ -455,8 +455,8 @@ var __vue_staticRenderFns__$f = [];
 
 const __vue_inject_styles__$f = function (inject) {
   if (!inject) return;
-  inject("data-v-7957105e_0", {
-    source: ".input-field[data-v-7957105e]{min-height:70px}.textarea-field[data-v-7957105e]{min-height:130px}.wysiwyg-field[data-v-7957105e]{min-height:400px}.documents[data-v-7957105e]{min-height:80px}",
+  inject("data-v-8d5810b0_0", {
+    source: ".input-field[data-v-8d5810b0]{min-height:70px}.textarea-field[data-v-8d5810b0]{min-height:130px}.wysiwyg-field[data-v-8d5810b0]{min-height:400px}.documents[data-v-8d5810b0]{min-height:80px}",
     map: undefined,
     media: undefined
   });
@@ -464,7 +464,7 @@ const __vue_inject_styles__$f = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$f = "data-v-7957105e";
+const __vue_scope_id__$f = "data-v-8d5810b0";
 /* module identifier */
 
 const __vue_module_identifier__$f = undefined;
