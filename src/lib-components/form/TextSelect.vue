@@ -1,33 +1,30 @@
 <template>
-
-      <v-select
-        key="select"
-        @change="blurField"
-        outlined
-        :label="opts.label + required"
-        
-        v-model="computedValue"
-        :items="items"
-        :item-text="opts.itemText"
-        :item-value="opts.itemValue"
-        :chips="multiple"
-        :deletable-chips="multiple"
-        :multiple="multiple"
-        :rules="rules"
-        validate-on-blur
-        small-chips
-        :dense="dense"
-        @focus="emitFocus"
-      ></v-select>
-   
+  <v-select
+    key="select"
+    @change="blurField"
+    outlined
+    :label="opts.label + required"
+    v-model="computedValue"
+    :items="items"
+    :item-text="opts.itemText"
+    :item-value="opts.itemValue"
+    :chips="multiple"
+    :deletable-chips="multiple"
+    :multiple="multiple"
+    :rules="rules"
+    validate-on-blur
+    small-chips
+    :dense="dense"
+    @focus="emitFocus"
+  ></v-select>
 </template>
 
 <script>
-import { VSelect } from 'vuetify/lib';
+import { VSelect } from "vuetify/lib";
 export default {
   name: "TextSelect",
   components: {
-        VSelect,
+    VSelect,
   },
   created() {
     // this.seed();
@@ -35,28 +32,28 @@ export default {
   props: {
     active: {
       type: Object,
-      required: true
+      required: true,
     },
     opts: {
       type: Object,
-      required: true
+      required: true,
     },
     editField: {
       type: String,
-      required: true
+      required: true,
     },
     value: {
-      type: [String, Number],
-      required: false
+      type: [String, Number, Array],
+      required: false,
     },
     dense: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
-      assigned: null
+      assigned: null,
     };
   },
   computed: {
@@ -66,7 +63,7 @@ export default {
       },
       set(value) {
         this.assigned = value;
-      }
+      },
     },
     items() {
       if (this.opts.model) {
@@ -86,7 +83,7 @@ export default {
       let value = this.value;
       let required = true;
       if (this.opts.required) {
-        required = value => !!value || "Required.";
+        required = (value) => !!value || "Required.";
       }
       return [required];
     },
@@ -96,7 +93,7 @@ export default {
       } else {
         return "";
       }
-    }
+    },
   },
   updated() {
     this.refreshModel();
@@ -116,7 +113,7 @@ export default {
     },
     emitFocus() {
       this.$emit("fieldFocused", this.opts.field);
-    }
+    },
   },
   watch: {
     assigned() {
@@ -124,8 +121,8 @@ export default {
     },
     value() {
       this.assigned = this.value;
-    }
-  }
+    },
+  },
 };
 </script>
 
