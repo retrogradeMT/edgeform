@@ -455,8 +455,8 @@ var __vue_staticRenderFns__$f = [];
 
 const __vue_inject_styles__$f = function (inject) {
   if (!inject) return;
-  inject("data-v-8d5810b0_0", {
-    source: ".input-field[data-v-8d5810b0]{min-height:70px}.textarea-field[data-v-8d5810b0]{min-height:130px}.wysiwyg-field[data-v-8d5810b0]{min-height:400px}.documents[data-v-8d5810b0]{min-height:80px}",
+  inject("data-v-7149e72c_0", {
+    source: ".input-field[data-v-7149e72c]{min-height:70px}.textarea-field[data-v-7149e72c]{min-height:130px}.wysiwyg-field[data-v-7149e72c]{min-height:400px}.documents[data-v-7149e72c]{min-height:80px}",
     map: undefined,
     media: undefined
   });
@@ -464,7 +464,7 @@ const __vue_inject_styles__$f = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$f = "data-v-8d5810b0";
+const __vue_scope_id__$f = "data-v-7149e72c";
 /* module identifier */
 
 const __vue_module_identifier__$f = undefined;
@@ -1455,7 +1455,6 @@ var __vue_render__$9 = function () {
   return _c('v-textarea', {
     attrs: {
       "hide-details": "",
-      "filled": _vm.editField != _vm.opts.field,
       "label": _vm.label,
       "rows": "7",
       "outlined": "",
@@ -1488,7 +1487,7 @@ var __vue_staticRenderFns__$9 = [];
 const __vue_inject_styles__$9 = undefined;
 /* scoped */
 
-const __vue_scope_id__$9 = "data-v-f2e7fde6";
+const __vue_scope_id__$9 = "data-v-4c4a52b4";
 /* module identifier */
 
 const __vue_module_identifier__$9 = undefined;
@@ -1547,8 +1546,8 @@ var __vue_staticRenderFns__$8 = [];
 
 const __vue_inject_styles__$8 = function (inject) {
   if (!inject) return;
-  inject("data-v-e2d10ec2_0", {
-    source: ".overflow-y-scroll[data-v-e2d10ec2]{overflow-y:scroll}",
+  inject("data-v-528d20bf_0", {
+    source: ".overflow-y-scroll[data-v-528d20bf]{overflow-y:scroll}",
     map: undefined,
     media: undefined
   });
@@ -1556,7 +1555,7 @@ const __vue_inject_styles__$8 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$8 = "data-v-e2d10ec2";
+const __vue_scope_id__$8 = "data-v-528d20bf";
 /* module identifier */
 
 const __vue_module_identifier__$8 = undefined;
@@ -1688,6 +1687,7 @@ var __vue_render__$7 = function () {
       "outlined": "",
       "dense": _vm.dense,
       "label": _vm.opts.label + _vm.required,
+      "hide-details": "",
       "readonly": _vm.opts.readOnly,
       "rules": _vm.rules,
       "validate-on-blur": ""
@@ -1724,8 +1724,8 @@ var __vue_staticRenderFns__$7 = [];
 
 const __vue_inject_styles__$7 = function (inject) {
   if (!inject) return;
-  inject("data-v-da244980_0", {
-    source: ".fade-enter-active[data-v-da244980],.fade-leave-active[data-v-da244980]{transition:opacity .1s}.fade-enter[data-v-da244980],.fade-leave-to[data-v-da244980]{opacity:0}",
+  inject("data-v-2dacb537_0", {
+    source: ".fade-enter-active[data-v-2dacb537],.fade-leave-active[data-v-2dacb537]{transition:opacity .1s}.fade-enter[data-v-2dacb537],.fade-leave-to[data-v-2dacb537]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -1733,7 +1733,7 @@ const __vue_inject_styles__$7 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$7 = "data-v-da244980";
+const __vue_scope_id__$7 = "data-v-2dacb537";
 /* module identifier */
 
 const __vue_module_identifier__$7 = undefined;
@@ -2394,7 +2394,7 @@ var script$2 = {
       required: true
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Array],
       required: false
     },
     dense: {
@@ -2543,8 +2543,8 @@ var __vue_staticRenderFns__$2 = [];
 
 const __vue_inject_styles__$2 = function (inject) {
   if (!inject) return;
-  inject("data-v-3db1e40e_0", {
-    source: ".fade-enter-active[data-v-3db1e40e],.fade-leave-active[data-v-3db1e40e]{transition:opacity .1s}.fade-enter[data-v-3db1e40e],.fade-leave-to[data-v-3db1e40e]{opacity:0}",
+  inject("data-v-504251b0_0", {
+    source: ".fade-enter-active[data-v-504251b0],.fade-leave-active[data-v-504251b0]{transition:opacity .1s}.fade-enter[data-v-504251b0],.fade-leave-to[data-v-504251b0]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -2552,7 +2552,7 @@ const __vue_inject_styles__$2 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$2 = "data-v-3db1e40e";
+const __vue_scope_id__$2 = "data-v-504251b0";
 /* module identifier */
 
 const __vue_module_identifier__$2 = undefined;
@@ -3238,7 +3238,7 @@ var components = /*#__PURE__*/Object.freeze({
   States: __vue_component__$b,
   SwitchEdit: __vue_component__$a,
   TextareaEdit: __vue_component__$9,
-  TextAreaReadOnly: __vue_component__$8,
+  TextareaReadOnly: __vue_component__$8,
   TextEdit: __vue_component__$7,
   Money: __vue_component__$6,
   MoneyRaw: __vue_component__$5,
@@ -3258,4 +3258,4 @@ const install = function installEdgeForm(Vue) {
 }; // Create module definition for Vue.use()
 
 export default install;
-export { __vue_component__$d as DateEdit, __vue_component__$f as EdgeForm, __vue_component__$e as Loading, __vue_component__$c as ModelAutocomplete, __vue_component__$6 as Money, __vue_component__$5 as MoneyRaw, __vue_component__$4 as Phone, __vue_component__$b as States, __vue_component__$a as SwitchEdit, __vue_component__$8 as TextAreaReadOnly, __vue_component__$7 as TextEdit, __vue_component__$3 as TextReadOnly, __vue_component__$2 as TextSelect, __vue_component__$9 as TextareaEdit, __vue_component__$1 as Time, __vue_component__ as Wysiwyg };
+export { __vue_component__$d as DateEdit, __vue_component__$f as EdgeForm, __vue_component__$e as Loading, __vue_component__$c as ModelAutocomplete, __vue_component__$6 as Money, __vue_component__$5 as MoneyRaw, __vue_component__$4 as Phone, __vue_component__$b as States, __vue_component__$a as SwitchEdit, __vue_component__$7 as TextEdit, __vue_component__$3 as TextReadOnly, __vue_component__$2 as TextSelect, __vue_component__$9 as TextareaEdit, __vue_component__$8 as TextareaReadOnly, __vue_component__$1 as Time, __vue_component__ as Wysiwyg };

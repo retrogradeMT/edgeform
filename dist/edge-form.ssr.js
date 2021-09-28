@@ -615,8 +615,8 @@ var __vue_staticRenderFns__$f = [];
 
 var __vue_inject_styles__$f = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-8d5810b0_0", {
-    source: ".input-field[data-v-8d5810b0]{min-height:70px}.textarea-field[data-v-8d5810b0]{min-height:130px}.wysiwyg-field[data-v-8d5810b0]{min-height:400px}.documents[data-v-8d5810b0]{min-height:80px}",
+  inject("data-v-7149e72c_0", {
+    source: ".input-field[data-v-7149e72c]{min-height:70px}.textarea-field[data-v-7149e72c]{min-height:130px}.wysiwyg-field[data-v-7149e72c]{min-height:400px}.documents[data-v-7149e72c]{min-height:80px}",
     map: undefined,
     media: undefined
   });
@@ -624,10 +624,10 @@ var __vue_inject_styles__$f = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$f = "data-v-8d5810b0";
+var __vue_scope_id__$f = "data-v-7149e72c";
 /* module identifier */
 
-var __vue_module_identifier__$f = "data-v-8d5810b0";
+var __vue_module_identifier__$f = "data-v-7149e72c";
 /* functional template */
 
 var __vue_is_functional_template__$f = false;
@@ -1552,7 +1552,6 @@ var __vue_render__$9 = function __vue_render__() {
   return _c('v-textarea', {
     attrs: {
       "hide-details": "",
-      "filled": _vm.editField != _vm.opts.field,
       "label": _vm.label,
       "rows": "7",
       "outlined": "",
@@ -1585,10 +1584,10 @@ var __vue_staticRenderFns__$9 = [];
 var __vue_inject_styles__$9 = undefined;
 /* scoped */
 
-var __vue_scope_id__$9 = "data-v-f2e7fde6";
+var __vue_scope_id__$9 = "data-v-4c4a52b4";
 /* module identifier */
 
-var __vue_module_identifier__$9 = "data-v-f2e7fde6";
+var __vue_module_identifier__$9 = "data-v-4c4a52b4";
 /* functional template */
 
 var __vue_is_functional_template__$9 = false;
@@ -1640,8 +1639,8 @@ var __vue_staticRenderFns__$8 = [];
 
 var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-e2d10ec2_0", {
-    source: ".overflow-y-scroll[data-v-e2d10ec2]{overflow-y:scroll}",
+  inject("data-v-528d20bf_0", {
+    source: ".overflow-y-scroll[data-v-528d20bf]{overflow-y:scroll}",
     map: undefined,
     media: undefined
   });
@@ -1649,10 +1648,10 @@ var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$8 = "data-v-e2d10ec2";
+var __vue_scope_id__$8 = "data-v-528d20bf";
 /* module identifier */
 
-var __vue_module_identifier__$8 = "data-v-e2d10ec2";
+var __vue_module_identifier__$8 = "data-v-528d20bf";
 /* functional template */
 
 var __vue_is_functional_template__$8 = false;
@@ -1769,6 +1768,7 @@ var __vue_render__$7 = function __vue_render__() {
       "outlined": "",
       "dense": _vm.dense,
       "label": _vm.opts.label + _vm.required,
+      "hide-details": "",
       "readonly": _vm.opts.readOnly,
       "rules": _vm.rules,
       "validate-on-blur": ""
@@ -1805,8 +1805,8 @@ var __vue_staticRenderFns__$7 = [];
 
 var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-da244980_0", {
-    source: ".fade-enter-active[data-v-da244980],.fade-leave-active[data-v-da244980]{transition:opacity .1s}.fade-enter[data-v-da244980],.fade-leave-to[data-v-da244980]{opacity:0}",
+  inject("data-v-2dacb537_0", {
+    source: ".fade-enter-active[data-v-2dacb537],.fade-leave-active[data-v-2dacb537]{transition:opacity .1s}.fade-enter[data-v-2dacb537],.fade-leave-to[data-v-2dacb537]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -1814,10 +1814,10 @@ var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$7 = "data-v-da244980";
+var __vue_scope_id__$7 = "data-v-2dacb537";
 /* module identifier */
 
-var __vue_module_identifier__$7 = "data-v-da244980";
+var __vue_module_identifier__$7 = "data-v-2dacb537";
 /* functional template */
 
 var __vue_is_functional_template__$7 = false;
@@ -2430,7 +2430,7 @@ var script$2 = {
       required: true
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Array],
       required: false
     },
     dense: {
@@ -2562,8 +2562,8 @@ var __vue_staticRenderFns__$2 = [];
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-3db1e40e_0", {
-    source: ".fade-enter-active[data-v-3db1e40e],.fade-leave-active[data-v-3db1e40e]{transition:opacity .1s}.fade-enter[data-v-3db1e40e],.fade-leave-to[data-v-3db1e40e]{opacity:0}",
+  inject("data-v-504251b0_0", {
+    source: ".fade-enter-active[data-v-504251b0],.fade-leave-active[data-v-504251b0]{transition:opacity .1s}.fade-enter[data-v-504251b0],.fade-leave-to[data-v-504251b0]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -2571,10 +2571,10 @@ var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$2 = "data-v-3db1e40e";
+var __vue_scope_id__$2 = "data-v-504251b0";
 /* module identifier */
 
-var __vue_module_identifier__$2 = "data-v-3db1e40e";
+var __vue_module_identifier__$2 = "data-v-504251b0";
 /* functional template */
 
 var __vue_is_functional_template__$2 = false;
@@ -3202,7 +3202,7 @@ var __vue_is_functional_template__ = false;
 var __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextAreaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});var install = function installEdgeForm(Vue) {
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextareaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});var install = function installEdgeForm(Vue) {
   Object.entries(components$1).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         componentName = _ref2[0],
@@ -3211,7 +3211,7 @@ var __vue_component__ = /*#__PURE__*/normalizeComponent({
     Vue.component(componentName, component);
   });
 }; // Create module definition for Vue.use()
-var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextAreaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});// only expose one global var, with component exports exposed as properties of
+var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextareaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});// only expose one global var, with component exports exposed as properties of
 // that global var (eg. plugin.component)
 
 Object.entries(components).forEach(function (_ref) {
