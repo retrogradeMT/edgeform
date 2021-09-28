@@ -10,7 +10,7 @@
         v-on:keydown.tab="emitChange"
         v-model="computedValue"
         :label="opts.label + required"
-        
+        hide-details
         :readonly="opts.readOnly"
         :rules="rules"
         validate-on-blur

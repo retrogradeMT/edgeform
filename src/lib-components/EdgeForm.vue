@@ -1,27 +1,18 @@
 <template>
   <v-card-text>
     <loading :loading="loading"></loading>
-     <v-form
-    :ref="'form_' + random"
-    
-  >
-   
-    <div
-      v-for="field in orderedHeaders"
-      :key="field.order"
+    <v-form :ref="'form_' + random">
+      <div
+        v-for="field in orderedHeaders"
+        :key="field.order"
         class="align-start d-flex"
         @mouseenter="focusField(field.field)"
         @mousedown="fieldSelected(field.field)"
         :class="mapClass(field.type)"
-    >
-
-    
-    
-      <!-- TODO: Move icon to a prepend inside of the component.  -->
+      >
+        <!-- TODO: Move icon to a prepend inside of the component.  -->
         <!-- <v-icon v-if="field.icon">{{ field.icon }}</v-icon> -->
-     
 
-     
         <component
           :dense="dense"
           v-model="alt[field.field]"
@@ -41,29 +32,29 @@
         >
         </component>
       </div>
-     </v-form>
+    </v-form>
   </v-card-text>
 </template>
 
 <script>
-import { VCard } from 'vuetify/lib';
-import { VCardText } from 'vuetify/lib';
-import { VRow } from 'vuetify/lib';
-import { VCol } from 'vuetify/lib';
-import { VIcon } from 'vuetify/lib';
-import { VForm } from 'vuetify/lib';
+import { VCard } from "vuetify/lib";
+import { VCardText } from "vuetify/lib";
+import { VRow } from "vuetify/lib";
+import { VCol } from "vuetify/lib";
+import { VIcon } from "vuetify/lib";
+import { VForm } from "vuetify/lib";
 const typeToComponent = {
-    text: "textEdit",
-    email: "textEdit",
-    website: "selectEdit",
-    checkbox: "SwitchEdit",
-    textarea: "textareaEdit",
-    select: "textSelect",
-    date: "dateEdit",
-//   documents: "file-attachments",
-//   documentsReadOnly: "file-attachments-read-only",
-//   contactAutocomplete: "contactAutocomplete",
-//   companyAutocomplete: "companyAutocomplete"
+  text: "textEdit",
+  email: "textEdit",
+  website: "selectEdit",
+  checkbox: "SwitchEdit",
+  textarea: "textareaEdit",
+  select: "textSelect",
+  date: "dateEdit",
+  //   documents: "file-attachments",
+  //   documentsReadOnly: "file-attachments-read-only",
+  //   contactAutocomplete: "contactAutocomplete",
+  //   companyAutocomplete: "companyAutocomplete"
 };
 const typeToClass = {
   text: "input-field",
@@ -82,70 +73,69 @@ const typeToClass = {
   modelAutocomplete: "input-field",
   wysiwyg: "wysiwyg-field",
   documents: "documents",
-  documentsReadOnly: "documents"
+  documentsReadOnly: "documents",
 };
-
 
 export default {
   name: "edge-form",
   components: {
-        VCard,
-        VCardText,
-        VRow,
-        VCol,
-        VIcon,
-        VForm
-    },
-    created () {
-      this.generateRandom();
-    },
+    VCard,
+    VCardText,
+    VRow,
+    VCol,
+    VIcon,
+    VForm,
+  },
+  created() {
+    this.generateRandom();
+  },
 
   data() {
     return {
       editField: "",
       selectedField: "",
       loading: false,
-      random: ""
+      random: "",
     };
   },
   props: {
     headers: {
       type: Array,
-      required: true
+      required: true,
     },
     active: {
       type: Object,
-      required: true
+      required: true,
     },
     path: {
       type: String,
-      default: null
+      default: null,
     },
     meta: {
       type: Boolean,
-      default: false
+      default: false,
     },
     subUpdate: {
       type: Boolean,
-      default: false
+      default: false,
     },
     parentPath: {
       type: String,
-      default: ""
+      default: "",
     },
     noIcon: {
       type: Boolean,
-      default: false
+      default: false,
     },
     dense: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   computed: {
     orderedHeaders() {
       let orderedHeaders = JSON.parse(JSON.stringify(this.headers));
-      orderedHeaders.sort((a, b) => ( a.order > b.order ? 1 : -1 ));
+      orderedHeaders.sort((a, b) => (a.order > b.order ? 1 : -1));
       return orderedHeaders;
     },
     alt: {
@@ -154,13 +144,14 @@ export default {
       },
       set() {
         this.saveChangedField();
-      }
+      },
     },
-
   },
   methods: {
-    generateRandom(){
-      this.random = Math.random().toString().substr(2, 8);
+    generateRandom() {
+      this.random = Math.random()
+        .toString()
+        .substr(2, 8);
     },
     async fieldFocused(field) {
       await this.focusField(field);
@@ -212,7 +203,7 @@ export default {
     },
     validate(e, field) {
       console.log({ field });
-      let header = this.headers.find(h => h.field === field);
+      let header = this.headers.find((h) => h.field === field);
       if (header && header.required && e.length === 0) {
         this.$emit("update-validate", false, field);
         this.showErrorSnack(header.label + " is a required field!");
@@ -240,7 +231,7 @@ export default {
       this.loading = true;
       let formData = new FormData();
 
-      files.forEach(obj => {
+      files.forEach((obj) => {
         formData.append("file[]", obj);
       });
 
@@ -277,7 +268,7 @@ export default {
       } else {
         obj = {
           id: this.active.id,
-          payload: resource
+          payload: resource,
         };
 
         let success = await this.$store.dispatch(`${this.path}/update`, obj);
@@ -289,8 +280,8 @@ export default {
       if (this.subUpdate) {
         this.$store.dispatch(`${this.parentPath}/list`);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

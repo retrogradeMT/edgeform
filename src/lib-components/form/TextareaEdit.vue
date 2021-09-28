@@ -2,7 +2,6 @@
   
       <v-textarea
         hide-details
-        :filled="editField != opts.field"
         :label="label"
         rows="7"
         v-model="computedValue"
