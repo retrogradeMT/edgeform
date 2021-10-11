@@ -1,4 +1,4 @@
-'use strict';require('vue');var lib=require('vuetify/lib'),vueTheMask=require('vue-the-mask'),tiptapVuetify=require('tiptap-vuetify');function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+'use strict';require('vue');var lib=require('vuetify/lib'),vueTheMask=require('vue-the-mask');function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -2868,10 +2868,44 @@ var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$1,
   staticRenderFns: __vue_staticRenderFns__$1
 }, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, createInjectorSSR, undefined);//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script = {
-  components: {
-    TiptapVuetify: tiptapVuetify.TiptapVuetify
-  },
+  name: "wysiwyg",
   props: {
     active: {
       type: Object,
@@ -2892,19 +2926,53 @@ var script = {
   },
   data: function data() {
     return {
-      textcolor: '#000000',
-      coloredtext: '',
-      dialog: false,
       editor: null,
-      emit: null,
-      swatches: [['#FF0000', '#AA0000', '#550000'], ['#FFFF00', '#AAAA00', '#555500'], ['#00FF00', '#00AA00', '#005500'], ['#00FFFF', '#00AAAA', '#005555'], ['#0000FF', '#0000AA', '#000000']]
+      editorOption: {
+        // Some Quill options...
+        theme: "snow",
+        modules: {
+          toolbar: [["bold", "italic", "underline", "strike"], ["blockquote", "code-block"], ["link", "image"], [{
+            list: "ordered"
+          }, {
+            list: "bullet"
+          }], [{
+            script: "sub"
+          }, {
+            script: "super"
+          }], [{
+            indent: "-1"
+          }, {
+            indent: "+1"
+          }], [{
+            direction: "rtl"
+          }], [{
+            size: ["small", false, "large", "huge"]
+          }], [{
+            header: [1, 2, 3, 4, 5, 6, false]
+          }], [{
+            color: []
+          }, {
+            background: []
+          }], [{
+            font: []
+          }], [{
+            align: []
+          }], ["clean"]]
+        }
+      },
+      emit: null
     };
   },
   computed: {
+    //TODO: finish auto inserts
     auto_inserts: function auto_inserts() {
       var _this = this;
 
+      console.log("opts");
+      console.log(this.opts);
+
       if (this.opts.hasOwnProperty("auto_inserts")) {
+        console.log(this.opts.auto_inserts);
         var auto_inserts = [];
         this.opts.auto_inserts.forEach(function (insert) {
           if (insert.manual_list.length > 0) {
@@ -2951,24 +3019,6 @@ var script = {
 
       return [];
     },
-    extensions: function extensions() {
-      if (this.opts.hasOwnProperty("extensions")) {
-        return this.opts.extensions;
-      }
-
-      return [tiptapVuetify.History, tiptapVuetify.Blockquote, tiptapVuetify.Link, tiptapVuetify.Underline, tiptapVuetify.Strike, tiptapVuetify.Italic, tiptapVuetify.ListItem, tiptapVuetify.BulletList, tiptapVuetify.Image, tiptapVuetify.OrderedList, [tiptapVuetify.Heading, {
-        options: {
-          levels: [1, 2, 3]
-        }
-      }], tiptapVuetify.Bold, tiptapVuetify.Code, tiptapVuetify.HorizontalRule, tiptapVuetify.Paragraph, tiptapVuetify.HardBreak];
-    },
-    label: function label() {
-      if (this.editField == this.opts.field) {
-        return this.opts.label;
-      }
-
-      return "";
-    },
     computedValue: {
       get: function get() {
         return this.value;
@@ -2976,18 +3026,6 @@ var script = {
       set: function set(value) {
         this.emit = value;
       }
-    },
-    rules: function rules() {
-      this.value;
-      var required = true;
-
-      if (this.opts.required) {
-        required = function required(value) {
-          return !!value || "Required.";
-        };
-      }
-
-      return [required];
     },
     required: function required() {
       if (this.opts.required) {
@@ -2997,28 +3035,25 @@ var script = {
       }
     }
   },
+  mounted: function mounted() {},
   methods: {
+    addText: function addText(mergeFieldText) {
+      var selection = this.editor.getSelection(true);
+      this.editor.insertText(selection.index, mergeFieldText);
+    },
     blurField: function blurField() {
       if (this.emit) {
         this.$emit("act", this.emit, this.opts.field);
       }
     },
-    emitFocus: function emitFocus() {
+    onEditorBlur: function onEditorBlur(editor) {//console.log('editor blur!', editor)
+      // this.$emit("act", this.emit, this.opts.field);
+    },
+    onEditorFocus: function onEditorFocus(editor) {
       this.$emit("fieldFocused", this.opts.field);
+      this.editor = editor; //console.log('editor focus!', editor)
     },
-    onInit: function onInit(_ref) {
-      var editor = _ref.editor;
-      this.editor = editor;
-    },
-    addText: function addText(value) {
-      var transaction = this.editor.state.tr.insertText(value);
-      this.editor.view.dispatch(transaction);
-    },
-    addColoredText: function addColoredText() {
-      var transaction = this.editor.state.tr.insertText('{{ [' + this.textcolor + '] ' + this.coloredtext + ' }}');
-      this.editor.view.dispatch(transaction);
-      this.textcolor = '#000000', this.coloredtext = '';
-      this.dialog = false;
+    onEditorReady: function onEditorReady(editor) {//console.log('editor ready!', editor)
     }
   },
   watch: {
@@ -3041,84 +3076,15 @@ var __vue_render__ = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c('div', {
-    staticClass: "mx-2",
     on: {
       "mouseleave": _vm.blurField
     }
-  }, [_vm.auto_inserts.length > 0 ? _c('v-toolbar', {
+  }, [_vm._ssrNode("<label class=\"v-label v-label--active theme--light caption mb-1\">" + _vm._ssrEscape(_vm._s(_vm.opts.label + _vm.required)) + "</label> "), _vm.auto_inserts.length > 0 ? _c('v-toolbar', {
     attrs: {
       "dense": "",
       "flat": ""
     }
-  }, [_c('v-spacer'), _vm._v(" "), _c('v-dialog', {
-    attrs: {
-      "width": "380"
-    },
-    scopedSlots: _vm._u([{
-      key: "activator",
-      fn: function fn(ref) {
-        var on = ref.on;
-        var attrs = ref.attrs;
-        return [_c('v-btn', _vm._g(_vm._b({
-          staticClass: "ml-4",
-          attrs: {
-            "outlined": "",
-            "color": "primary",
-            "dark": "",
-            "small": ""
-          }
-        }, 'v-btn', attrs, false), on), [_vm._v("\n          Colored Text\n        ")])];
-      }
-    }], null, false, 2817776160),
-    model: {
-      value: _vm.dialog,
-      callback: function callback($$v) {
-        _vm.dialog = $$v;
-      },
-      expression: "dialog"
-    }
-  }, [_vm._v(" "), _c('v-card', [_c('v-card-title', {
-    staticClass: "headline grey lighten-2"
-  }, [_vm._v("\n          Choose Text Color\n        ")]), _vm._v(" "), _c('v-card-text', [_c('v-color-picker', {
-    attrs: {
-      "swatches": _vm.swatches,
-      "dot-size": "17",
-      "hide-canvas": "",
-      "show-swatches": "",
-      "hide-inputs": "",
-      "swatches-max-height": "200"
-    },
-    model: {
-      value: _vm.textcolor,
-      callback: function callback($$v) {
-        _vm.textcolor = $$v;
-      },
-      expression: "textcolor"
-    }
-  }), _vm._v(" "), _c('v-textarea', {
-    attrs: {
-      "outlined": "",
-      "name": "input-7-4",
-      "label": "Enter Text"
-    },
-    model: {
-      value: _vm.coloredtext,
-      callback: function callback($$v) {
-        _vm.coloredtext = $$v;
-      },
-      expression: "coloredtext"
-    }
-  })], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
-    attrs: {
-      "color": "primary",
-      "text": ""
-    },
-    on: {
-      "click": function click($event) {
-        return _vm.addColoredText();
-      }
-    }
-  }, [_vm._v("\n            Insert Text\n          ")])], 1)], 1)], 1), _vm._v(" "), _vm._l(_vm.auto_inserts, function (insert, index) {
+  }, [_c('v-spacer'), _vm._v(" "), _vm._l(_vm.auto_inserts, function (insert, index) {
     return [_c('v-menu', {
       key: index,
       staticClass: "ma-4",
@@ -3154,17 +3120,21 @@ var __vue_render__ = function __vue_render__() {
         }
       }, [_c('v-list-item-title', [_vm._v(_vm._s(item.label))])], 1);
     }), 1)], 1)];
-  })], 2) : _vm._e(), _vm._ssrNode(" <label class=\"v-label v-label--active theme--light caption mb-1\">" + _vm._ssrEscape(_vm._s(_vm.opts.label + _vm.required)) + "</label> <span class=\"caption\"></span> "), _c('tiptap-vuetify', {
-    staticClass: "editor-height",
+  })], 2) : _vm._e(), _vm._ssrNode(" "), _c('quill-editor', {
+    ref: "editor",
     attrs: {
-      "card-props": {
-        outlined: true
-      },
-      "extensions": _vm.extensions
+      "options": _vm.editorOption
     },
     on: {
-      "focus": _vm.emitFocus,
-      "init": _vm.onInit
+      "blur": function blur($event) {
+        return _vm.onEditorBlur($event);
+      },
+      "focus": function focus($event) {
+        return _vm.onEditorFocus($event);
+      },
+      "ready": function ready($event) {
+        return _vm.onEditorReady($event);
+      }
     },
     model: {
       value: _vm.computedValue,
@@ -3181,8 +3151,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-708b0f54_0", {
-    source: ".editor-height{height:100%}.ProseMirror{min-height:300px}.tiptap-vuetify-editor__content{min-height:300px}",
+  inject("data-v-6c8e55fe_0", {
+    source: ".quill-editor{height:250px;min-height:200;max-height:200;border-radius:2px}.ql-container.ql-snow{border-radius:6px}.ql-toolbar.ql-snow{border-radius:6px}",
     map: undefined,
     media: undefined
   });
@@ -3193,7 +3163,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 var __vue_scope_id__ = undefined;
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-708b0f54";
+var __vue_module_identifier__ = "data-v-6c8e55fe";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

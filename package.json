@@ -1,6 +1,6 @@
 {
   "name": "edge-form",
-  "version": "1.0.16",
+  "version": "1.0.20",
   "description": "Dynamic form loaded by json",
   "main": "dist/edge-form.ssr.js",
   "browser": "dist/edge-form.esm.js",
@@ -46,10 +46,10 @@
     "vuetify": "^2.3.4",
     "vuetify-loader": "^1.6.0",
     "vue-the-mask": "^0.11.1",
-    "tiptap-vuetify": "^2.24.0",
     "v-currency-field": "^3.1.1",
     "v-money": "^0.8.1",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "vue-quill-editor": "^3.0.6"
   },
   "engines": {
     "node": ">=12"

@@ -1,7 +1,6 @@
 import 'vue';
 import { VCard, VCardText, VRow, VCol, VIcon, VForm, VOverlay, VBtn, VProgressCircular, VDatePicker, VTextField, VMenu, VAutocomplete, VSwitch, VTextarea, VSelect } from 'vuetify/lib';
 import { mask } from 'vue-the-mask';
-import { TiptapVuetify, History, Blockquote, Link, Underline, Strike, Italic, ListItem, BulletList, Image, OrderedList, Heading, Bold, Code, HorizontalRule, Paragraph, HardBreak } from 'tiptap-vuetify';
 
 //
 const typeToComponent = {
@@ -2874,10 +2873,44 @@ const __vue_component__$1 = /*#__PURE__*/normalizeComponent({
 }, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
 
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script = {
-  components: {
-    TiptapVuetify
-  },
+  name: "wysiwyg",
   props: {
     active: {
       type: Object,
@@ -2896,17 +2929,55 @@ var script = {
       required: false
     }
   },
-  data: () => ({
-    textcolor: '#000000',
-    coloredtext: '',
-    dialog: false,
-    editor: null,
-    emit: null,
-    swatches: [['#FF0000', '#AA0000', '#550000'], ['#FFFF00', '#AAAA00', '#555500'], ['#00FF00', '#00AA00', '#005500'], ['#00FFFF', '#00AAAA', '#005555'], ['#0000FF', '#0000AA', '#000000']]
-  }),
+
+  data() {
+    return {
+      editor: null,
+      editorOption: {
+        // Some Quill options...
+        theme: "snow",
+        modules: {
+          toolbar: [["bold", "italic", "underline", "strike"], ["blockquote", "code-block"], ["link", "image"], [{
+            list: "ordered"
+          }, {
+            list: "bullet"
+          }], [{
+            script: "sub"
+          }, {
+            script: "super"
+          }], [{
+            indent: "-1"
+          }, {
+            indent: "+1"
+          }], [{
+            direction: "rtl"
+          }], [{
+            size: ["small", false, "large", "huge"]
+          }], [{
+            header: [1, 2, 3, 4, 5, 6, false]
+          }], [{
+            color: []
+          }, {
+            background: []
+          }], [{
+            font: []
+          }], [{
+            align: []
+          }], ["clean"]]
+        }
+      },
+      emit: null
+    };
+  },
+
   computed: {
+    //TODO: finish auto inserts
     auto_inserts() {
+      console.log("opts");
+      console.log(this.opts);
+
       if (this.opts.hasOwnProperty("auto_inserts")) {
+        console.log(this.opts.auto_inserts);
         let auto_inserts = [];
         this.opts.auto_inserts.forEach(insert => {
           if (insert.manual_list.length > 0) {
@@ -2953,26 +3024,6 @@ var script = {
       return [];
     },
 
-    extensions() {
-      if (this.opts.hasOwnProperty("extensions")) {
-        return this.opts.extensions;
-      }
-
-      return [History, Blockquote, Link, Underline, Strike, Italic, ListItem, BulletList, Image, OrderedList, [Heading, {
-        options: {
-          levels: [1, 2, 3]
-        }
-      }], Bold, Code, HorizontalRule, Paragraph, HardBreak];
-    },
-
-    label() {
-      if (this.editField == this.opts.field) {
-        return this.opts.label;
-      }
-
-      return "";
-    },
-
     computedValue: {
       get() {
         return this.value;
@@ -2984,17 +3035,6 @@ var script = {
 
     },
 
-    rules() {
-      this.value;
-      let required = true;
-
-      if (this.opts.required) {
-        required = value => !!value || "Required.";
-      }
-
-      return [required];
-    },
-
     required() {
       if (this.opts.required) {
         return "*";
@@ -3004,33 +3044,31 @@ var script = {
     }
 
   },
+
+  mounted() {},
+
   methods: {
+    addText(mergeFieldText) {
+      var selection = this.editor.getSelection(true);
+      this.editor.insertText(selection.index, mergeFieldText);
+    },
+
     blurField() {
       if (this.emit) {
         this.$emit("act", this.emit, this.opts.field);
       }
     },
 
-    emitFocus() {
+    onEditorBlur(editor) {//console.log('editor blur!', editor)
+      // this.$emit("act", this.emit, this.opts.field);
+    },
+
+    onEditorFocus(editor) {
       this.$emit("fieldFocused", this.opts.field);
+      this.editor = editor; //console.log('editor focus!', editor)
     },
 
-    onInit({
-      editor
-    }) {
-      this.editor = editor;
-    },
-
-    addText(value) {
-      const transaction = this.editor.state.tr.insertText(value);
-      this.editor.view.dispatch(transaction);
-    },
-
-    addColoredText() {
-      const transaction = this.editor.state.tr.insertText('{{ [' + this.textcolor + '] ' + this.coloredtext + ' }}');
-      this.editor.view.dispatch(transaction);
-      this.textcolor = '#000000', this.coloredtext = '';
-      this.dialog = false;
+    onEditorReady(editor) {//console.log('editor ready!', editor)
     }
 
   },
@@ -3058,84 +3096,17 @@ var __vue_render__ = function () {
   var _c = _vm._self._c || _h;
 
   return _c('div', {
-    staticClass: "mx-2",
     on: {
       "mouseleave": _vm.blurField
     }
-  }, [_vm.auto_inserts.length > 0 ? _c('v-toolbar', {
+  }, [_c('label', {
+    staticClass: "v-label v-label--active theme--light caption mb-1"
+  }, [_vm._v(_vm._s(_vm.opts.label + _vm.required))]), _vm._v(" "), _vm.auto_inserts.length > 0 ? _c('v-toolbar', {
     attrs: {
       "dense": "",
       "flat": ""
     }
-  }, [_c('v-spacer'), _vm._v(" "), _c('v-dialog', {
-    attrs: {
-      "width": "380"
-    },
-    scopedSlots: _vm._u([{
-      key: "activator",
-      fn: function (ref) {
-        var on = ref.on;
-        var attrs = ref.attrs;
-        return [_c('v-btn', _vm._g(_vm._b({
-          staticClass: "ml-4",
-          attrs: {
-            "outlined": "",
-            "color": "primary",
-            "dark": "",
-            "small": ""
-          }
-        }, 'v-btn', attrs, false), on), [_vm._v("\n          Colored Text\n        ")])];
-      }
-    }], null, false, 2817776160),
-    model: {
-      value: _vm.dialog,
-      callback: function ($$v) {
-        _vm.dialog = $$v;
-      },
-      expression: "dialog"
-    }
-  }, [_vm._v(" "), _c('v-card', [_c('v-card-title', {
-    staticClass: "headline grey lighten-2"
-  }, [_vm._v("\n          Choose Text Color\n        ")]), _vm._v(" "), _c('v-card-text', [_c('v-color-picker', {
-    attrs: {
-      "swatches": _vm.swatches,
-      "dot-size": "17",
-      "hide-canvas": "",
-      "show-swatches": "",
-      "hide-inputs": "",
-      "swatches-max-height": "200"
-    },
-    model: {
-      value: _vm.textcolor,
-      callback: function ($$v) {
-        _vm.textcolor = $$v;
-      },
-      expression: "textcolor"
-    }
-  }), _vm._v(" "), _c('v-textarea', {
-    attrs: {
-      "outlined": "",
-      "name": "input-7-4",
-      "label": "Enter Text"
-    },
-    model: {
-      value: _vm.coloredtext,
-      callback: function ($$v) {
-        _vm.coloredtext = $$v;
-      },
-      expression: "coloredtext"
-    }
-  })], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
-    attrs: {
-      "color": "primary",
-      "text": ""
-    },
-    on: {
-      "click": function ($event) {
-        return _vm.addColoredText();
-      }
-    }
-  }, [_vm._v("\n            Insert Text\n          ")])], 1)], 1)], 1), _vm._v(" "), _vm._l(_vm.auto_inserts, function (insert, index) {
+  }, [_c('v-spacer'), _vm._v(" "), _vm._l(_vm.auto_inserts, function (insert, index) {
     return [_c('v-menu', {
       key: index,
       staticClass: "ma-4",
@@ -3171,21 +3142,21 @@ var __vue_render__ = function () {
         }
       }, [_c('v-list-item-title', [_vm._v(_vm._s(item.label))])], 1);
     }), 1)], 1)];
-  })], 2) : _vm._e(), _vm._v(" "), _c('label', {
-    staticClass: "v-label v-label--active theme--light caption mb-1"
-  }, [_vm._v(_vm._s(_vm.opts.label + _vm.required))]), _vm._v(" "), _c('span', {
-    staticClass: "caption"
-  }), _vm._v(" "), _c('tiptap-vuetify', {
-    staticClass: "editor-height",
+  })], 2) : _vm._e(), _vm._v(" "), _c('quill-editor', {
+    ref: "editor",
     attrs: {
-      "card-props": {
-        outlined: true
-      },
-      "extensions": _vm.extensions
+      "options": _vm.editorOption
     },
     on: {
-      "focus": _vm.emitFocus,
-      "init": _vm.onInit
+      "blur": function ($event) {
+        return _vm.onEditorBlur($event);
+      },
+      "focus": function ($event) {
+        return _vm.onEditorFocus($event);
+      },
+      "ready": function ($event) {
+        return _vm.onEditorReady($event);
+      }
     },
     model: {
       value: _vm.computedValue,
@@ -3202,8 +3173,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-708b0f54_0", {
-    source: ".editor-height{height:100%}.ProseMirror{min-height:300px}.tiptap-vuetify-editor__content{min-height:300px}",
+  inject("data-v-6c8e55fe_0", {
+    source: ".quill-editor{height:250px;min-height:200;max-height:200;border-radius:2px}.ql-container.ql-snow{border-radius:6px}.ql-toolbar.ql-snow{border-radius:6px}",
     map: undefined,
     media: undefined
   });

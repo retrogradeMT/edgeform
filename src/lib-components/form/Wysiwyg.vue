@@ -1,65 +1,10 @@
 <template>
-  <div class="mx-2" @mouseleave="blurField">
+  <div class="" @mouseleave="blurField">
+    <label class="v-label v-label--active theme--light caption mb-1">{{
+      opts.label + required
+    }}</label>
     <v-toolbar dense flat v-if="auto_inserts.length > 0">
       <v-spacer></v-spacer>
-
-
-      <v-dialog
-        v-model="dialog"
-        width="380"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            class="ml-4" 
-            outlined 
-            color="primary" 
-            dark
-            v-bind="attrs"
-            v-on="on"
-            small
-          >
-            Colored Text
-          </v-btn>
-        </template>
-
-        <v-card>
-          <v-card-title class="headline grey lighten-2">
-            Choose Text Color
-          </v-card-title>
-
-          <v-card-text>
-              <v-color-picker
-                v-model="textcolor"
-                :swatches="swatches"
-                dot-size="17"
-                  hide-canvas
-                  show-swatches
-                  hide-inputs
-                  swatches-max-height="200"
-              ></v-color-picker>
-              <v-textarea
-                  outlined
-                  name="input-7-4"
-                  label="Enter Text"
-                  v-model="coloredtext"
-              ></v-textarea>
-          </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              text
-              @click="addColoredText()"
-            >
-              Insert Text
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
       <template v-for="(insert, index) in auto_inserts">
         <v-menu class="ma-4" :key="index" offset-y>
           <template v-slot:activator="{ on }">
@@ -79,46 +24,20 @@
         </v-menu>
       </template>
     </v-toolbar>
-    <label class="v-label v-label--active theme--light caption mb-1">{{
-      opts.label + required
-    }}</label>
-    <span class="caption"></span>
-    <tiptap-vuetify
-      :card-props="{ outlined: true }"
-      v-model.lazy="computedValue"
-      :extensions="extensions"
-      @focus="emitFocus"
-      @init="onInit"
-      class="editor-height"
+    <quill-editor
+      ref="editor"
+      v-model="computedValue"
+      :options="editorOption"
+      @blur="onEditorBlur($event)"
+      @focus="onEditorFocus($event)"
+      @ready="onEditorReady($event)"
     />
   </div>
 </template>
 
 <script>
-import {
-  TiptapVuetify,
-  Heading,
-  Bold,
-  Italic,
-  Strike,
-  Underline,
-  Code,
-  Paragraph,
-  BulletList,
-  OrderedList,
-  ListItem,
-  Link,
-  Blockquote,
-  HardBreak,
-  HorizontalRule,
-  History,
-  Image
-} from "tiptap-vuetify";
-
 export default {
-  components: {
-    TiptapVuetify
-  },
+  name: "wysiwyg",
   props: {
     active: {
       type: Object,
@@ -137,23 +56,43 @@ export default {
       required: false
     }
   },
-  data: () => ({
-    textcolor: '#000000',
-    coloredtext: '',
-    dialog: false,
-    editor: null,
-    emit: null,
-    swatches: [
-      ['#FF0000', '#AA0000', '#550000'],
-      ['#FFFF00', '#AAAA00', '#555500'],
-      ['#00FF00', '#00AA00', '#005500'],
-      ['#00FFFF', '#00AAAA', '#005555'],
-      ['#0000FF', '#0000AA', '#000000'],
-    ],
-  }),
+  data() {
+    return {
+      editor: null,
+      editorOption: {
+        // Some Quill options...
+        theme: "snow",
+        modules: {
+          toolbar: [
+            ["bold", "italic", "underline", "strike"],
+            ["blockquote", "code-block"],
+            ["link", "image"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ script: "sub" }, { script: "super" }],
+            [{ indent: "-1" }, { indent: "+1" }],
+            [{ direction: "rtl" }],
+
+            [{ size: ["small", false, "large", "huge"] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ color: [] }, { background: [] }],
+            [{ font: [] }],
+            [{ align: [] }],
+
+            ["clean"]
+          ]
+        }
+      },
+      emit: null
+    };
+  },
   computed: {
+    //TODO: finish auto inserts
     auto_inserts() {
+      console.log("opts");
+      console.log(this.opts);
       if (this.opts.hasOwnProperty("auto_inserts")) {
+        console.log(this.opts.auto_inserts);
         let auto_inserts = [];
         this.opts.auto_inserts.forEach(insert => {
           if (insert.manual_list.length > 0) {
@@ -200,42 +139,6 @@ export default {
       }
       return [];
     },
-    extensions() {
-      if (this.opts.hasOwnProperty("extensions")) {
-        return this.opts.extensions;
-      }
-      return [
-        History,
-        Blockquote,
-        Link,
-        Underline,
-        Strike,
-        Italic,
-        ListItem,
-        BulletList,
-        Image,
-        OrderedList,
-        [
-          Heading,
-          {
-            options: {
-              levels: [1, 2, 3]
-            }
-          }
-        ],
-        Bold,
-        Code,
-        HorizontalRule,
-        Paragraph,
-        HardBreak
-      ];
-    },
-    label() {
-      if (this.editField == this.opts.field) {
-        return this.opts.label;
-      }
-      return "";
-    },
     computedValue: {
       get() {
         return this.value;
@@ -243,14 +146,6 @@ export default {
       set(value) {
         this.emit = value;
       }
-    },
-    rules() {
-      let value = this.value;
-      let required = true;
-      if (this.opts.required) {
-        required = value => !!value || "Required.";
-      }
-      return [required];
     },
     required() {
       if (this.opts.required) {
@@ -260,28 +155,32 @@ export default {
       }
     }
   },
+  mounted() {},
   methods: {
+    addText(mergeFieldText) {
+      var selection = this.editor.getSelection(true);
+      this.editor.insertText(selection.index, mergeFieldText);
+    },
     blurField() {
       if (this.emit) {
-        this.$emit("act", this.emit, this.opts.field);
+       
+          this.$emit("act", this.emit, this.opts.field);
+        
       }
     },
-    emitFocus() {
+    onEditorBlur(editor) {
+      //console.log('editor blur!', editor)
+     
+        // this.$emit("act", this.emit, this.opts.field);
+      
+    },
+    onEditorFocus(editor) {
       this.$emit("fieldFocused", this.opts.field);
-    },
-    onInit({ editor }) {
       this.editor = editor;
+      //console.log('editor focus!', editor)
     },
-    addText(value) {
-      const transaction = this.editor.state.tr.insertText(value);
-      this.editor.view.dispatch(transaction);
-    },
-    addColoredText() {
-      const transaction = this.editor.state.tr.insertText('{{ [' + this.textcolor + '] ' + this.coloredtext +' }}');
-      this.editor.view.dispatch(transaction);
-      this.textcolor = '#000000',
-      this.coloredtext = '';
-      this.dialog = false
+    onEditorReady(editor) {
+      //console.log('editor ready!', editor)
     }
   },
   watch: {
@@ -296,13 +195,17 @@ export default {
 </script>
 
 <style lang="scss">
-.editor-height {
-  height: 100%;
+.quill-editor {
+  height: 250px;
+  min-height: 200;
+  max-height: 200;
+  border-radius: 2px;
 }
-.ProseMirror {
-  min-height: 300px;
+.ql-container.ql-snow {
+  border-radius: 6px;
 }
-.tiptap-vuetify-editor__content {
-  min-height: 300px;
+.ql-toolbar.ql-snow {
+  border-radius: 6px;
 }
+
 </style>
