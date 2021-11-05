@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 export { default as EdgeForm } from './EdgeForm.vue'
+export { default as EdgeFormSingle } from './EdgeFormSingle.vue'
 export { default as Loading } from './Loading.vue'
 export { default as DateEdit } from './form/DateEdit.vue'
 export { default as ModelAutocomplete } from './form/ModelAutocomplete.vue'

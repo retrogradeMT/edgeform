@@ -1,6 +1,6 @@
 {
   "name": "edge-form",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Dynamic form loaded by json",
   "main": "dist/edge-form.ssr.js",
   "browser": "dist/edge-form.esm.js",
