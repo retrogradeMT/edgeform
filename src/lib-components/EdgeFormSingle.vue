@@ -5,27 +5,27 @@
       <div
 
         class="align-start d-flex"
-        @mouseenter="focusField(activeQustion.field)"
-        @mousedown="fieldSelected(activeQustion.field)"
-        :class="mapClass(activeQustion.type)"
+        @mouseenter="focusField(activeQuestion.field)"
+        @mousedown="fieldSelected(activeQuestion.field)"
+        :class="mapClass(activeQuestion.type)"
       >
         <!-- TODO: Move icon to a prepend inside of the component.  -->
         <!-- <v-icon v-if="field.icon">{{ field.icon }}</v-icon> -->
         <transition name="fade">
         <component
           :dense="dense"
-          v-model="alt[activeQustion.field]"
-          :is="mapType(activeQustion.type)"
-          :key="activeQustion.order"
-          :index="activeQustion.order"
+          v-model="alt[activeQuestion.field]"
+          :is="mapType(activeQuestion.type)"
+          :key="activeQuestion.order"
+          :index="activeQuestion.order"
           :active="active"
-          :opts="activeQustion"
-          :header="activeQustion"
-          :label="activeQustion.text"
+          :opts="activeQuestion"
+          :header="activeQuestion"
+          :label="activeQuestion.text"
           :editField="editField"
-          :field="activeQustion.field"
+          :field="activeQuestion.field"
           :path="path"
-          :class="mapClass(activeQustion.type)"
+          :class="mapClass(activeQuestion.type)"
           v-on:act="update"
           v-on:fieldFocused="fieldFocused"
         >

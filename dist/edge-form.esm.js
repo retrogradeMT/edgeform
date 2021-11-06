@@ -3,7 +3,7 @@ import { VCard, VCardText, VRow, VCol, VIcon, VForm, VOverlay, VBtn, VProgressCi
 import { mask } from 'vue-the-mask';
 
 //
-const typeToComponent = {
+const typeToComponent$1 = {
   text: "textEdit",
   email: "textEdit",
   website: "selectEdit",
@@ -16,7 +16,7 @@ const typeToComponent = {
   //   companyAutocomplete: "companyAutocomplete"
 
 };
-const typeToClass = {
+const typeToClass$1 = {
   text: "input-field",
   money: "input-field",
   select: "input-field",
@@ -35,7 +35,7 @@ const typeToClass = {
   documents: "documents",
   documentsReadOnly: "documents"
 };
-var script$f = {
+var script$g = {
   name: "edge-form",
   components: {
     VCard,
@@ -185,11 +185,11 @@ var script$f = {
     },
 
     mapType(type) {
-      return typeToComponent[type] ? typeToComponent[type] : type;
+      return typeToComponent$1[type] ? typeToComponent$1[type] : type;
     },
 
     mapClass(type) {
-      return typeToClass[type] ? typeToClass[type] : "input-field";
+      return typeToClass$1[type] ? typeToClass$1[type] : "input-field";
     },
 
     selected(e) {
@@ -390,10 +390,10 @@ function addStyle(id, css) {
 }
 
 /* script */
-const __vue_script__$f = script$f;
+const __vue_script__$g = script$g;
 /* template */
 
-var __vue_render__$f = function () {
+var __vue_render__$g = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -449,10 +449,10 @@ var __vue_render__$f = function () {
   }), 0)], 1);
 };
 
-var __vue_staticRenderFns__$f = [];
+var __vue_staticRenderFns__$g = [];
 /* style */
 
-const __vue_inject_styles__$f = function (inject) {
+const __vue_inject_styles__$g = function (inject) {
   if (!inject) return;
   inject("data-v-7149e72c_0", {
     source: ".input-field[data-v-7149e72c]{min-height:70px}.textarea-field[data-v-7149e72c]{min-height:130px}.wysiwyg-field[data-v-7149e72c]{min-height:400px}.documents[data-v-7149e72c]{min-height:80px}",
@@ -463,7 +463,370 @@ const __vue_inject_styles__$f = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$f = "data-v-7149e72c";
+const __vue_scope_id__$g = "data-v-7149e72c";
+/* module identifier */
+
+const __vue_module_identifier__$g = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$g = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$g = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$g,
+  staticRenderFns: __vue_staticRenderFns__$g
+}, __vue_inject_styles__$g, __vue_script__$g, __vue_scope_id__$g, __vue_is_functional_template__$g, __vue_module_identifier__$g, false, createInjector, undefined, undefined);
+
+//
+const typeToComponent = {
+  text: "textEdit",
+  email: "textEdit",
+  website: "selectEdit",
+  checkbox: "SwitchEdit",
+  textarea: "textareaEdit",
+  select: "textSelect",
+  date: "dateEdit" //   documents: "file-attachments",
+  //   documentsReadOnly: "file-attachments-read-only",
+  //   contactAutocomplete: "contactAutocomplete",
+  //   companyAutocomplete: "companyAutocomplete"
+
+};
+const typeToClass = {
+  text: "input-field",
+  money: "input-field",
+  select: "input-field",
+  checkbox: "input-field",
+  date: "input-field",
+  textarea: "textarea-field",
+  memberAction: "input-field",
+  renew: "input-field",
+  phone: "input-field",
+  email: "input-field",
+  states: "input-field",
+  time: "input-field",
+  website: "input-field",
+  modelAutocomplete: "input-field",
+  wysiwyg: "wysiwyg-field",
+  documents: "documents",
+  documentsReadOnly: "documents"
+};
+var script$f = {
+  name: "edge-form",
+  components: {
+    VCard,
+    VCardText,
+    VRow,
+    VCol,
+    VIcon,
+    VForm
+  },
+
+  created() {
+    this.generateRandom();
+  },
+
+  data() {
+    return {
+      editField: "",
+      selectedField: "",
+      loading: false,
+      random: ""
+    };
+  },
+
+  props: {
+    headers: {
+      type: Array,
+      required: true
+    },
+    active: {
+      type: Object,
+      required: true
+    },
+    path: {
+      type: String,
+      default: null
+    },
+    meta: {
+      type: Boolean,
+      default: false
+    },
+    subUpdate: {
+      type: Boolean,
+      default: false
+    },
+    parentPath: {
+      type: String,
+      default: ""
+    },
+    noIcon: {
+      type: Boolean,
+      default: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
+    },
+    currentQuestionIndex: {
+      type: Number,
+      default: 0,
+      required: false
+    }
+  },
+  computed: {
+    orderedHeaders() {
+      let orderedHeaders = JSON.parse(JSON.stringify(this.headers));
+      orderedHeaders.sort((a, b) => a.order > b.order ? 1 : -1);
+      return orderedHeaders;
+    },
+
+    alt: {
+      get() {
+        return this.active;
+      },
+
+      set() {
+        this.saveChangedField();
+      }
+
+    },
+
+    activeQuestion() {
+      let activeIndex = this.currentQuestionIndex;
+      return this.orderedHeaders.find(question => {
+        return question.order === activeIndex;
+      });
+    }
+
+  },
+  methods: {
+    generateRandom() {
+      this.random = Math.random().toString().substr(2, 8);
+    },
+
+    async fieldFocused(field) {
+      await this.focusField(field);
+      this.fieldSelected(field);
+    },
+
+    fieldSelected(selectedField) {
+      if (selectedField != this.selectedField) {
+        this.saveChangedField();
+      }
+
+      this.selectedField = selectedField;
+    },
+
+    clickoutside() {
+      if (!this.meta) {
+        this.saveChangedField();
+      }
+    },
+
+    saveChangedField() {
+      let meta = this.meta;
+      let newValue = this.alt[this.selectedField];
+      let savedHeader = this.headers.find(({
+        value
+      }) => value === this.selectedField);
+
+      if (savedHeader) {
+        if (this.active.hasOwnProperty("id")) {
+          if (savedHeader.type === "documents") {
+            if (Array.isArray(newValue) && newValue.length > 0) {
+              if (!newValue[0].hasOwnProperty("id")) {
+                this.fileUpload(newValue);
+              }
+            }
+          }
+        } else {
+          if (meta) {
+            if (savedHeader.type === "documents") {
+              if (newValue.length > 0 && !_.isEmpty(newValue)) {
+                if (!newValue[0].hasOwnProperty("id")) {
+                  this.$emit(`update:${this.selectedField}`, newValue);
+                }
+              }
+            } else {
+              //this.validate(newValue, this.selectedField);
+              this.$emit(`update:${this.selectedField}`, newValue); //this.$emit("act", newValue, this.selectedField);
+            }
+          }
+        }
+      }
+    },
+
+    validate(e, field) {
+      console.log({
+        field
+      });
+      let header = this.headers.find(h => h.field === field);
+
+      if (header && header.required && e.length === 0) {
+        this.$emit("update-validate", false, field);
+        this.showErrorSnack(header.label + " is a required field!");
+        return false;
+      } else {
+        this.$emit("update-validate", true, field);
+        return true;
+      }
+    },
+
+    mapType(type) {
+      return typeToComponent[type] ? typeToComponent[type] : type;
+    },
+
+    mapClass(type) {
+      return typeToClass[type] ? typeToClass[type] : "input-field";
+    },
+
+    selected(e) {
+      this.$emit(this.selectAction, e);
+    },
+
+    focusField(name) {
+      this.editField = name;
+    },
+
+    async fileUpload(files) {
+      if (this.loading) return;
+      this.loading = true;
+      let formData = new FormData();
+      files.forEach(obj => {
+        formData.append("file[]", obj);
+      });
+      let response = await this.$repositories[this.path].subCreateFile(this.active.id, formData, "documents");
+
+      if (response.hasOwnProperty("error")) {
+        this.$store.dispatch(`${this.path}/set_snack`, response);
+      } else {
+        this.$store.dispatch(`${this.path}/list`);
+        this.$emit("success", files);
+      }
+
+      this.loading = false;
+    },
+
+    async update(e, field) {
+      console.log({
+        e
+      });
+      console.log({
+        field
+      });
+      if (this.loading) return;
+
+      if (!this.validate(e, field)) {
+        return;
+      }
+
+      this.loading = true;
+      let resource = {};
+      resource[field] = e;
+      let obj = {};
+
+      if (this.meta) {
+        this.$emit("act", e, field);
+      } else {
+        obj = {
+          id: this.active.id,
+          payload: resource
+        };
+        let success = await this.$store.dispatch(`${this.path}/update`, obj);
+
+        if (success) {
+          this.$emit("success", e);
+        }
+      }
+
+      this.loading = false;
+
+      if (this.subUpdate) {
+        this.$store.dispatch(`${this.parentPath}/list`);
+      }
+    }
+
+  }
+};
+
+/* script */
+const __vue_script__$f = script$f;
+/* template */
+
+var __vue_render__$f = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('v-card-text', [_c('loading', {
+    attrs: {
+      "loading": _vm.loading
+    }
+  }), _vm._v(" "), _c('v-form', {
+    ref: 'form_' + _vm.random
+  }, [_c('div', {
+    staticClass: "align-start d-flex",
+    class: _vm.mapClass(_vm.activeQuestion.type),
+    on: {
+      "mouseenter": function ($event) {
+        return _vm.focusField(_vm.activeQuestion.field);
+      },
+      "mousedown": function ($event) {
+        return _vm.fieldSelected(_vm.activeQuestion.field);
+      }
+    }
+  }, [_c('transition', {
+    attrs: {
+      "name": "fade"
+    }
+  }, [_c(_vm.mapType(_vm.activeQuestion.type), {
+    key: _vm.activeQuestion.order,
+    tag: "component",
+    class: _vm.mapClass(_vm.activeQuestion.type),
+    attrs: {
+      "dense": _vm.dense,
+      "index": _vm.activeQuestion.order,
+      "active": _vm.active,
+      "opts": _vm.activeQuestion,
+      "header": _vm.activeQuestion,
+      "label": _vm.activeQuestion.text,
+      "editField": _vm.editField,
+      "field": _vm.activeQuestion.field,
+      "path": _vm.path
+    },
+    on: {
+      "act": _vm.update,
+      "fieldFocused": _vm.fieldFocused
+    },
+    model: {
+      value: _vm.alt[_vm.activeQuestion.field],
+      callback: function ($$v) {
+        _vm.$set(_vm.alt, _vm.activeQuestion.field, $$v);
+      },
+      expression: "alt[activeQuestion.field]"
+    }
+  })], 1)], 1)])], 1);
+};
+
+var __vue_staticRenderFns__$f = [];
+/* style */
+
+const __vue_inject_styles__$f = function (inject) {
+  if (!inject) return;
+  inject("data-v-aae64e54_0", {
+    source: ".input-field[data-v-aae64e54]{min-height:70px}.textarea-field[data-v-aae64e54]{min-height:130px}.wysiwyg-field[data-v-aae64e54]{min-height:400px}.documents[data-v-aae64e54]{min-height:80px}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+const __vue_scope_id__$f = "data-v-aae64e54";
 /* module identifier */
 
 const __vue_module_identifier__$f = undefined;
@@ -3202,7 +3565,8 @@ const __vue_component__ = /*#__PURE__*/normalizeComponent({
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  EdgeForm: __vue_component__$f,
+  EdgeForm: __vue_component__$g,
+  EdgeFormSingle: __vue_component__$f,
   Loading: __vue_component__$e,
   DateEdit: __vue_component__$d,
   ModelAutocomplete: __vue_component__$c,
@@ -3229,4 +3593,4 @@ const install = function installEdgeForm(Vue) {
 }; // Create module definition for Vue.use()
 
 export default install;
-export { __vue_component__$d as DateEdit, __vue_component__$f as EdgeForm, __vue_component__$e as Loading, __vue_component__$c as ModelAutocomplete, __vue_component__$6 as Money, __vue_component__$5 as MoneyRaw, __vue_component__$4 as Phone, __vue_component__$b as States, __vue_component__$a as SwitchEdit, __vue_component__$7 as TextEdit, __vue_component__$3 as TextReadOnly, __vue_component__$2 as TextSelect, __vue_component__$9 as TextareaEdit, __vue_component__$8 as TextareaReadOnly, __vue_component__$1 as Time, __vue_component__ as Wysiwyg };
+export { __vue_component__$d as DateEdit, __vue_component__$g as EdgeForm, __vue_component__$f as EdgeFormSingle, __vue_component__$e as Loading, __vue_component__$c as ModelAutocomplete, __vue_component__$6 as Money, __vue_component__$5 as MoneyRaw, __vue_component__$4 as Phone, __vue_component__$b as States, __vue_component__$a as SwitchEdit, __vue_component__$7 as TextEdit, __vue_component__$3 as TextReadOnly, __vue_component__$2 as TextSelect, __vue_component__$9 as TextareaEdit, __vue_component__$8 as TextareaReadOnly, __vue_component__$1 as Time, __vue_component__ as Wysiwyg };

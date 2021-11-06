@@ -107,7 +107,7 @@ function _nonIterableSpread() {
 
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}var typeToComponent = {
+}var typeToComponent$1 = {
   text: "textEdit",
   email: "textEdit",
   website: "selectEdit",
@@ -120,7 +120,7 @@ function _nonIterableRest() {
   //   companyAutocomplete: "companyAutocomplete"
 
 };
-var typeToClass = {
+var typeToClass$1 = {
   text: "input-field",
   money: "input-field",
   select: "input-field",
@@ -139,7 +139,7 @@ var typeToClass = {
   documents: "documents",
   documentsReadOnly: "documents"
 };
-var script$f = {
+var script$g = {
   name: "edge-form",
   components: {
     VCard: lib.VCard,
@@ -302,10 +302,10 @@ var script$f = {
       }
     },
     mapType: function mapType(type) {
-      return typeToComponent[type] ? typeToComponent[type] : type;
+      return typeToComponent$1[type] ? typeToComponent$1[type] : type;
     },
     mapClass: function mapClass(type) {
-      return typeToClass[type] ? typeToClass[type] : "input-field";
+      return typeToClass$1[type] ? typeToClass$1[type] : "input-field";
     },
     selected: function selected(e) {
       this.$emit(this.selectAction, e);
@@ -551,10 +551,10 @@ function renderStyles(styles) {
     }
     return css;
 }/* script */
-var __vue_script__$f = script$f;
+var __vue_script__$g = script$g;
 /* template */
 
-var __vue_render__$f = function __vue_render__() {
+var __vue_render__$g = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -610,10 +610,10 @@ var __vue_render__$f = function __vue_render__() {
   }), 0)], 1);
 };
 
-var __vue_staticRenderFns__$f = [];
+var __vue_staticRenderFns__$g = [];
 /* style */
 
-var __vue_inject_styles__$f = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$g = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-7149e72c_0", {
     source: ".input-field[data-v-7149e72c]{min-height:70px}.textarea-field[data-v-7149e72c]{min-height:130px}.wysiwyg-field[data-v-7149e72c]{min-height:400px}.documents[data-v-7149e72c]{min-height:80px}",
@@ -624,10 +624,438 @@ var __vue_inject_styles__$f = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$f = "data-v-7149e72c";
+var __vue_scope_id__$g = "data-v-7149e72c";
 /* module identifier */
 
-var __vue_module_identifier__$f = "data-v-7149e72c";
+var __vue_module_identifier__$g = "data-v-7149e72c";
+/* functional template */
+
+var __vue_is_functional_template__$g = false;
+/* style inject shadow dom */
+
+var __vue_component__$g = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$g,
+  staticRenderFns: __vue_staticRenderFns__$g
+}, __vue_inject_styles__$g, __vue_script__$g, __vue_scope_id__$g, __vue_is_functional_template__$g, __vue_module_identifier__$g, false, undefined, createInjectorSSR, undefined);var typeToComponent = {
+  text: "textEdit",
+  email: "textEdit",
+  website: "selectEdit",
+  checkbox: "SwitchEdit",
+  textarea: "textareaEdit",
+  select: "textSelect",
+  date: "dateEdit" //   documents: "file-attachments",
+  //   documentsReadOnly: "file-attachments-read-only",
+  //   contactAutocomplete: "contactAutocomplete",
+  //   companyAutocomplete: "companyAutocomplete"
+
+};
+var typeToClass = {
+  text: "input-field",
+  money: "input-field",
+  select: "input-field",
+  checkbox: "input-field",
+  date: "input-field",
+  textarea: "textarea-field",
+  memberAction: "input-field",
+  renew: "input-field",
+  phone: "input-field",
+  email: "input-field",
+  states: "input-field",
+  time: "input-field",
+  website: "input-field",
+  modelAutocomplete: "input-field",
+  wysiwyg: "wysiwyg-field",
+  documents: "documents",
+  documentsReadOnly: "documents"
+};
+var script$f = {
+  name: "edge-form",
+  components: {
+    VCard: lib.VCard,
+    VCardText: lib.VCardText,
+    VRow: lib.VRow,
+    VCol: lib.VCol,
+    VIcon: lib.VIcon,
+    VForm: lib.VForm
+  },
+  created: function created() {
+    this.generateRandom();
+  },
+  data: function data() {
+    return {
+      editField: "",
+      selectedField: "",
+      loading: false,
+      random: ""
+    };
+  },
+  props: {
+    headers: {
+      type: Array,
+      required: true
+    },
+    active: {
+      type: Object,
+      required: true
+    },
+    path: {
+      type: String,
+      default: null
+    },
+    meta: {
+      type: Boolean,
+      default: false
+    },
+    subUpdate: {
+      type: Boolean,
+      default: false
+    },
+    parentPath: {
+      type: String,
+      default: ""
+    },
+    noIcon: {
+      type: Boolean,
+      default: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
+    },
+    currentQuestionIndex: {
+      type: Number,
+      default: 0,
+      required: false
+    }
+  },
+  computed: {
+    orderedHeaders: function orderedHeaders() {
+      var orderedHeaders = JSON.parse(JSON.stringify(this.headers));
+      orderedHeaders.sort(function (a, b) {
+        return a.order > b.order ? 1 : -1;
+      });
+      return orderedHeaders;
+    },
+    alt: {
+      get: function get() {
+        return this.active;
+      },
+      set: function set() {
+        this.saveChangedField();
+      }
+    },
+    activeQuestion: function activeQuestion() {
+      var activeIndex = this.currentQuestionIndex;
+      return this.orderedHeaders.find(function (question) {
+        return question.order === activeIndex;
+      });
+    }
+  },
+  methods: {
+    generateRandom: function generateRandom() {
+      this.random = Math.random().toString().substr(2, 8);
+    },
+    fieldFocused: function fieldFocused(field) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.focusField(field);
+
+              case 2:
+                _this.fieldSelected(field);
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    fieldSelected: function fieldSelected(selectedField) {
+      if (selectedField != this.selectedField) {
+        this.saveChangedField();
+      }
+
+      this.selectedField = selectedField;
+    },
+    clickoutside: function clickoutside() {
+      if (!this.meta) {
+        this.saveChangedField();
+      }
+    },
+    saveChangedField: function saveChangedField() {
+      var _this2 = this;
+
+      var meta = this.meta;
+      var newValue = this.alt[this.selectedField];
+      var savedHeader = this.headers.find(function (_ref) {
+        var value = _ref.value;
+        return value === _this2.selectedField;
+      });
+
+      if (savedHeader) {
+        if (this.active.hasOwnProperty("id")) {
+          if (savedHeader.type === "documents") {
+            if (Array.isArray(newValue) && newValue.length > 0) {
+              if (!newValue[0].hasOwnProperty("id")) {
+                this.fileUpload(newValue);
+              }
+            }
+          }
+        } else {
+          if (meta) {
+            if (savedHeader.type === "documents") {
+              if (newValue.length > 0 && !_.isEmpty(newValue)) {
+                if (!newValue[0].hasOwnProperty("id")) {
+                  this.$emit("update:".concat(this.selectedField), newValue);
+                }
+              }
+            } else {
+              //this.validate(newValue, this.selectedField);
+              this.$emit("update:".concat(this.selectedField), newValue); //this.$emit("act", newValue, this.selectedField);
+            }
+          }
+        }
+      }
+    },
+    validate: function validate(e, field) {
+      console.log({
+        field: field
+      });
+      var header = this.headers.find(function (h) {
+        return h.field === field;
+      });
+
+      if (header && header.required && e.length === 0) {
+        this.$emit("update-validate", false, field);
+        this.showErrorSnack(header.label + " is a required field!");
+        return false;
+      } else {
+        this.$emit("update-validate", true, field);
+        return true;
+      }
+    },
+    mapType: function mapType(type) {
+      return typeToComponent[type] ? typeToComponent[type] : type;
+    },
+    mapClass: function mapClass(type) {
+      return typeToClass[type] ? typeToClass[type] : "input-field";
+    },
+    selected: function selected(e) {
+      this.$emit(this.selectAction, e);
+    },
+    focusField: function focusField(name) {
+      this.editField = name;
+    },
+    fileUpload: function fileUpload(files) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var formData, response;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!_this3.loading) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt("return");
+
+              case 2:
+                _this3.loading = true;
+                formData = new FormData();
+                files.forEach(function (obj) {
+                  formData.append("file[]", obj);
+                });
+                _context2.next = 7;
+                return _this3.$repositories[_this3.path].subCreateFile(_this3.active.id, formData, "documents");
+
+              case 7:
+                response = _context2.sent;
+
+                if (response.hasOwnProperty("error")) {
+                  _this3.$store.dispatch("".concat(_this3.path, "/set_snack"), response);
+                } else {
+                  _this3.$store.dispatch("".concat(_this3.path, "/list"));
+
+                  _this3.$emit("success", files);
+                }
+
+                _this3.loading = false;
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    update: function update(e, field) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+        var resource, obj, success;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                console.log({
+                  e: e
+                });
+                console.log({
+                  field: field
+                });
+
+                if (!_this4.loading) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                return _context3.abrupt("return");
+
+              case 4:
+                if (_this4.validate(e, field)) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                return _context3.abrupt("return");
+
+              case 6:
+                _this4.loading = true;
+                resource = {};
+                resource[field] = e;
+                obj = {};
+
+                if (!_this4.meta) {
+                  _context3.next = 14;
+                  break;
+                }
+
+                _this4.$emit("act", e, field);
+
+                _context3.next = 19;
+                break;
+
+              case 14:
+                obj = {
+                  id: _this4.active.id,
+                  payload: resource
+                };
+                _context3.next = 17;
+                return _this4.$store.dispatch("".concat(_this4.path, "/update"), obj);
+
+              case 17:
+                success = _context3.sent;
+
+                if (success) {
+                  _this4.$emit("success", e);
+                }
+
+              case 19:
+                _this4.loading = false;
+
+                if (_this4.subUpdate) {
+                  _this4.$store.dispatch("".concat(_this4.parentPath, "/list"));
+                }
+
+              case 21:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    }
+  }
+};/* script */
+var __vue_script__$f = script$f;
+/* template */
+
+var __vue_render__$f = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('v-card-text', [_c('loading', {
+    attrs: {
+      "loading": _vm.loading
+    }
+  }), _vm._v(" "), _c('v-form', {
+    ref: 'form_' + _vm.random
+  }, [_c('div', {
+    staticClass: "align-start d-flex",
+    class: _vm.mapClass(_vm.activeQuestion.type),
+    on: {
+      "mouseenter": function mouseenter($event) {
+        return _vm.focusField(_vm.activeQuestion.field);
+      },
+      "mousedown": function mousedown($event) {
+        return _vm.fieldSelected(_vm.activeQuestion.field);
+      }
+    }
+  }, [_c('transition', {
+    attrs: {
+      "name": "fade"
+    }
+  }, [_c(_vm.mapType(_vm.activeQuestion.type), {
+    key: _vm.activeQuestion.order,
+    tag: "component",
+    class: _vm.mapClass(_vm.activeQuestion.type),
+    attrs: {
+      "dense": _vm.dense,
+      "index": _vm.activeQuestion.order,
+      "active": _vm.active,
+      "opts": _vm.activeQuestion,
+      "header": _vm.activeQuestion,
+      "label": _vm.activeQuestion.text,
+      "editField": _vm.editField,
+      "field": _vm.activeQuestion.field,
+      "path": _vm.path
+    },
+    on: {
+      "act": _vm.update,
+      "fieldFocused": _vm.fieldFocused
+    },
+    model: {
+      value: _vm.alt[_vm.activeQuestion.field],
+      callback: function callback($$v) {
+        _vm.$set(_vm.alt, _vm.activeQuestion.field, $$v);
+      },
+      expression: "alt[activeQuestion.field]"
+    }
+  })], 1)], 1)])], 1);
+};
+
+var __vue_staticRenderFns__$f = [];
+/* style */
+
+var __vue_inject_styles__$f = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-aae64e54_0", {
+    source: ".input-field[data-v-aae64e54]{min-height:70px}.textarea-field[data-v-aae64e54]{min-height:130px}.wysiwyg-field[data-v-aae64e54]{min-height:400px}.documents[data-v-aae64e54]{min-height:80px}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$f = "data-v-aae64e54";
+/* module identifier */
+
+var __vue_module_identifier__$f = "data-v-aae64e54";
 /* functional template */
 
 var __vue_is_functional_template__$f = false;
@@ -3172,7 +3600,7 @@ var __vue_is_functional_template__ = false;
 var __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextareaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});var install = function installEdgeForm(Vue) {
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,EdgeForm: __vue_component__$g,EdgeFormSingle: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextareaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});var install = function installEdgeForm(Vue) {
   Object.entries(components$1).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         componentName = _ref2[0],
@@ -3181,7 +3609,7 @@ var __vue_component__ = /*#__PURE__*/normalizeComponent({
     Vue.component(componentName, component);
   });
 }; // Create module definition for Vue.use()
-var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,EdgeForm: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextareaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});// only expose one global var, with component exports exposed as properties of
+var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,EdgeForm: __vue_component__$g,EdgeFormSingle: __vue_component__$f,Loading: __vue_component__$e,DateEdit: __vue_component__$d,ModelAutocomplete: __vue_component__$c,States: __vue_component__$b,SwitchEdit: __vue_component__$a,TextareaEdit: __vue_component__$9,TextareaReadOnly: __vue_component__$8,TextEdit: __vue_component__$7,Money: __vue_component__$6,MoneyRaw: __vue_component__$5,Phone: __vue_component__$4,TextReadOnly: __vue_component__$3,TextSelect: __vue_component__$2,Time: __vue_component__$1,Wysiwyg: __vue_component__});// only expose one global var, with component exports exposed as properties of
 // that global var (eg. plugin.component)
 
 Object.entries(components).forEach(function (_ref) {
